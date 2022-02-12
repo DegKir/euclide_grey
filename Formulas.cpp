@@ -2,7 +2,11 @@
 #include"Formulas.hpp"
 // git init
 // git add file.cpp anotherfile.cpp file.hpp 
-// git commit -a(vse file)
+// git commit -a(vse file) -m "Initial commit"
+// git ls-files
+// git log
+// git remote add origin <url>
+// git push
 Polynom::Polynom(std::vector<double> coefficients): _coefficients(coefficients){}
 double Polynom::get_value(double point_x)
 {
@@ -21,6 +25,5 @@ Polynom Polynom::get_derivative()
 	std::vector<double> derivative_coefficients;
 	for (int i = 1; i++; i<=_coefficients.size())
 		derivative_coefficients.push_back(_coefficients[i]*i);
-	Polynom derivative = Polynom(derivative_coefficients);
 	return Polynom(derivative_coefficients);
 }
