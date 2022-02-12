@@ -1,5 +1,6 @@
 #include<vector>
 #include"Formulas.hpp"
+#include<iostream>
 // git init
 // git add file.cpp anotherfile.cpp file.hpp 
 // git commit -a(vse file) -m "Initial commit"
@@ -21,10 +22,12 @@ double Polynom::get_value(double point_x)
 	return sum;
 }	
 //not actually givint derivative
-Polynom Polynom::get_derivative()
+void Polynom::get_derivative()
 {
+//	std::cout<<"kek"<<_coefficients.size()<<"kek"<<std::endl;
 	std::vector<double> derivative_coefficients;
-	for (int i = 1; i++; i<=_coefficients.size())
-		derivative_coefficients.push_back(_coefficients[i]*i);
-	return Polynom(derivative_coefficients);
+	for (int i =0; i<_coefficients.size(); i++)
+		std::cout<<_coefficients[i]*i<<std::endl;
+//		derivative_coefficients.push_back(_coefficients[i]*i);
+//	Polynom D(derivative_coefficients);
 }

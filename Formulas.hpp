@@ -6,6 +6,6 @@ private:
 	std::vector<double> _coefficients;
 public:
 	Polynom(std::vector<double>);
-	Polynom get_derivative();
+	void get_derivative();
 	double get_value(double);
 };
