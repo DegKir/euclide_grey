@@ -7,6 +7,7 @@
 // git log
 // git remote add origin <url>
 // git push
+// git git git giiiiiiiit
 Polynom::Polynom(std::vector<double> coefficients): _coefficients(coefficients){}
 double Polynom::get_value(double point_x)
 {
