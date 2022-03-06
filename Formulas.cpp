@@ -60,46 +60,63 @@ int Polynom::get_degree()
 
 std::pair<Polynom,Polynom> Polynom::divide(Polynom Pdivident,Polynom Pdivider)
 {
-//	std::vector<double> divident = Pdivident.get_coefficients();
-//	std::vector<double> divider = Pdivider.get_coefficients();
-//	std::vector<double> An=divident;
-//	std::vector<double> Qr();
+	std::vector<double> divident = Pdivident.get_coefficients();
+	std::vector<double> divider = Pdivider.get_coefficients();
+	std::vector<double> remainder=divident;
+	std::vector<double> quotient;
 //check if degree of divider is bigger then degree of divident
-//	if (Pdivider.get_degree() > Pdivident.get_degree())
-//		std::cout<<"degree of divider is bigger then degree of divident"<<std::endl;
-//also should check what if divident.size=divider.size and maybe we should look on coefficients 
-//need to get
-//	while (An.size()=>divider.size())
-//	{
-//		if (An.size()==divider.size())
-//			if(An.back()<divier.back())
+	if (Pdivider.get_degree() > Pdivident.get_degree())
+		std::cout<<"degree of divider is bigger then degree of divident"<<std::endl;
+	while (remainder.size()>=divider.size())
+	{
+//		if (remainder.size()==divider.size())
+//			if(remainder.back()<divider.back())
 //				break;
-//		if (An.first()==0)
-//		{
-//			Qr.pushback(0);
-//			continue;
-//		}
-//		//dont sure about krayniy cases
-//		std::vector<double> haha(An.size(),0);
-//		std::vector<double> razn();
-//		double q = An.back()/divider.back;
-//		Qr.pushback(q);
-//		//recheck this thins with some bright head
-//		for(int i=0;i<An.size();i++)
-//		{
-//			// kraynie points problem mabe
-//			if (i>=An.size()-divider.size())
-//				haha[i]=divider[i]*q;
-//			if (i<An.size()-divider.size())
-//				haha[i]=0;
-//		}
-//		//anti-plus
-//		for(int i =0; i<An.size();i++)
-//			razn.pushback(An[i]-haha[i]);
-//		An=razn;
-//	}
-//	std::pair<Polynom, Polynom> Result(Polynom(An),Polynom(Qr));
-//	return result;
+		//deleting elder zeros if they exists		
+		if (remainder.back()==0)
+		{
+			remainder.pop_back();
+			continue;
+		}
+		std::vector<double> deduct(remainder.size(),0);
+		std::vector<double> temp_quotient;
+		double q = remainder.back()/divider.back();
+		//adding coefficient into remainder
+		quotient.push_back(q);
+
+		int size_dif=remainder.size()-divider.size();
+
+		//calculating deduction vector
+		for(int i=0;i<remainder.size();i++)
+		{
+			if (i>=size_dif)
+				deduct[i]=q*divider[i-size_dif];
+			if (i<size_dif)
+				deduct[i]=0;
+		}
+		//checking deduction 
+		std::cout<<"deduct:"<<std::endl;
+		for (int i =0;i<deduct.size();i++)
+			std::cout<<i<<":"<<deduct[i]<<std::endl;
+		//deduction itself
+		std::cout<<"resultnig:"<<std::endl;
+		//std::cout<<remainder[3]-deduct[3]<<std::endl;
+		std::cout<<remainder.size()<<std::endl;
+		for(int i =0; i<remainder.size();i++)
+		{
+			temp_quotient.push_back(remainder[i]-deduct[i]);
+			std::cout<<i<<":"<<temp_quotient[i]<<std::endl;
+		}
+		
+		//looping
+		remainder=temp_quotient;
+	}
+	//need to reverse quotient vector
+	std::vector<double> reversed_quotient;
+	for (int i=quotient.size()-1;i>=0;i--)
+		reversed_quotient.push_back(quotient[i]);
+	std::pair<Polynom, Polynom> result{Polynom(remainder),Polynom(reversed_quotient)};
+	return result;
 }
 
 Predicate::Predicate(double constant, double point, Polynom polynom, bool negative):_constant(constant),_point(point),_polynom(polynom),_negative(negative){}

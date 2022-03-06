@@ -11,7 +11,8 @@ int main()
 {
 //	polynoms_print();
 //	degree_print();
-	predicate_print();
+//	predicate_print();
+	divider_print();
 	return 0;
 
 }
@@ -63,8 +64,8 @@ void degree_print()
 
 void divider_print()
 {
-	std::vector<double> a{2,-1,5,-8,1};
-	std::vector<double> b{1,-1,1};
+	std::vector<double> a{1,1,0,1};
+	std::vector<double> b{1,0,3};
 	Polynom A(a);
 	Polynom B(b);
 	std::cout<<"Polynom dividing checking..."<<std::endl;
@@ -72,5 +73,10 @@ void divider_print()
 	A.print();
 	std::cout<<"Divider is";
 	B.print();
+	std::pair<Polynom,Polynom> c=A.divide(A,B);
+	std::cout<<"remainder is "<<std::endl;
+	c.first.print();
+	std::cout<<"quotient is"<<std::endl;
+	c.second.print();
 	std::cout<<"Polynom dividing ended"<<std::endl;
 }

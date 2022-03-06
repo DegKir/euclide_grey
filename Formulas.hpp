@@ -11,6 +11,7 @@ public:
 	void print();
 	double get_value(double);
 	int get_degree();
+//	std::pair<Polynom,Polynom> ug_divide(Polynom,Polynom);
 	std::pair<Polynom,Polynom> divide(Polynom,Polynom);
 };
 
